@@ -1,16 +1,14 @@
-## Hi there 👋
+# Hi, I'm Amrit 👋
 
-<!--
-**amrit-verse/amrit-verse** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Computer Science Engineering student passionate about learning systems, Linux, and automation.
 
-Here are some ideas to get you started:
+## Current Journey
+- Learning Python automation
+- Exploring Linux systems
+- Building small projects every day
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Tools I Use
+- Python
+- Git
+- Linux (Debian)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=amrit-verse&show_icons=true)
