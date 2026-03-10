@@ -3,7 +3,7 @@
 Computer Science Engineering student passionate about learning systems, Linux, and automation.
 
 ## GitHub Stats
-![Amrit's GitHub stats](https://github-readme-stats.vercel.app/api?username=amrit-verse&show_icons=true&theme=tokyonight&cache_seconds=1800)
+![Amrit's GitHub stats](https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=amrit-verse&show_icons=true&theme=tokyonight)
 
 ## Current Journey
 - Learning Python automation
