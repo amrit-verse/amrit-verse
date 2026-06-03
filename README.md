@@ -90,8 +90,8 @@ Attendance management system designed to help students monitor and manage academ
 ## 📫 Connect With Me
 
 - GitHub: https://github.com/amrit-verse
-- Portfolio: https://amritesh.name.np *(coming soon)*
-- LinkedIn: *(add your LinkedIn profile here)*
+- Portfolio: https://amritesh.com.np *(coming soon)*
+- LinkedIn: https://www.linkedin.com/in/amrit2004/
 
 ---
 
