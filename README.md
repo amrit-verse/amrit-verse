@@ -47,7 +47,7 @@ I enjoy turning ideas into real-world applications, working across the full stac
 ![Debian](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-000000?style=for-the-badge&logo=render&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-```
+<!--
 ---
 
 ## 📌 Featured Projects
@@ -66,7 +66,7 @@ Developer portfolio showcasing projects, technical skills, certifications, and p
 
 ### 🎓 Attendance Guardian
 Attendance management system designed to help students monitor and manage academic attendance effectively.
-```
+-->
 ---
 
 ## 📊 GitHub Stats
