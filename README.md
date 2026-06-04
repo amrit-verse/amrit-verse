@@ -73,7 +73,7 @@ Attendance management system designed to help students monitor and manage academ
 
 ![Amrit's GitHub Stats](https://stats-github-readme.vercel.app/api?username=amrit-verse&show_icons=true&theme=tokyonight)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=amrit-verse&layout=compact&theme=tokyonight)
+![Top Languages](https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=amrit-verse&layout=compact&theme=tokyonight)
 
 ---
 
