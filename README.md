@@ -91,7 +91,7 @@ Attendance management system designed to help students monitor and manage academ
 
 - GitHub: https://github.com/amrit-verse
 - Portfolio: https://amritesh.com.np
-- LinkedIn: https://www.linkedin.com/in/amrit2004/
+- LinkedIn: https://www.linkedin.com/in/amriteshmishra0
 
 ---
 
