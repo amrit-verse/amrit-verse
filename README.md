@@ -97,4 +97,4 @@ Attendance management system designed to help students monitor and manage academ
 
 ### 💡 Philosophy
 
-> "Consistency beats intensity. Small improvements every day create extraordinary results over time."
+> “What we know is a drop, what we don't know is an ocean.”
