@@ -1,37 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="870" height="490" viewBox="0 0 870 490" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="13px">
-<rect x="0.5" y="0.5" width="869" height="489" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<text x="35" y="85" fill="#d70a53" font-weight="bold" xml:space="preserve">        _,met$$$$$gg.</text>
-<text x="35" y="104" fill="#d70a53" font-weight="bold" xml:space="preserve">     ,g$$$$$$$$$$$$$$$P.</text>
-<text x="35" y="123" fill="#d70a53" font-weight="bold" xml:space="preserve">   ,g$$P&quot;        &quot;&quot;&quot;Y$$.&quot;.</text>
-<text x="35" y="142" fill="#d70a53" font-weight="bold" xml:space="preserve">  ,$$P\&#x27;              `$$$.</text>
-<text x="35" y="161" fill="#d70a53" font-weight="bold" xml:space="preserve"> \&#x27;,$$P       ,ggs.     `$$b:</text>
-<text x="35" y="180" fill="#d70a53" font-weight="bold" xml:space="preserve"> `d$$\&#x27;     ,$P&quot;\&#x27;   .    $$$</text>
-<text x="35" y="199" fill="#d70a53" font-weight="bold" xml:space="preserve">  $$P      d$\&#x27;     ,    $$$P</text>
-<text x="35" y="218" fill="#d70a53" font-weight="bold" xml:space="preserve">  $$:      $$.   -    ,d$$\&#x27;</text>
-<text x="35" y="237" fill="#d70a53" font-weight="bold" xml:space="preserve">  $$;      Y$b._   _,d$P\&#x27;</text>
-<text x="35" y="256" fill="#d70a53" font-weight="bold" xml:space="preserve">  Y$$.    `.`&quot;Y$$$$P&quot;\&#x27;</text>
-<text x="35" y="275" fill="#d70a53" font-weight="bold" xml:space="preserve">  `$$b      &quot;-.__</text>
-<text x="35" y="294" fill="#d70a53" font-weight="bold" xml:space="preserve">   `Y$$</text>
-<text x="35" y="313" fill="#d70a53" font-weight="bold" xml:space="preserve">    `Y$$.</text>
-<text x="35" y="332" fill="#d70a53" font-weight="bold" xml:space="preserve">      `$$b.</text>
-<text x="35" y="351" fill="#d70a53" font-weight="bold" xml:space="preserve">        `Y$$b.</text>
-<text x="35" y="370" fill="#d70a53" font-weight="bold" xml:space="preserve">           `&quot;Y$b._</text>
-<text x="35" y="389" fill="#d70a53" font-weight="bold" xml:space="preserve">               `&quot;&quot;&quot;</text>
-<text x="365" y="42" xml:space="preserve"><tspan fill="#0969da">amrit@amrit-verse </tspan><tspan fill="#afb8c1">────────────────────────────────────</tspan></text>
-<text x="365" y="82" xml:space="preserve"><tspan fill="#953800">OS: </tspan><tspan fill="#afb8c1">.................... </tspan><tspan fill="#24292f">Debian GNU/Linux (bare-metal)</tspan></text>
-<text x="365" y="102" xml:space="preserve"><tspan fill="#953800">Shell: </tspan><tspan fill="#afb8c1">..................................... </tspan><tspan fill="#24292f">bash, zsh</tspan></text>
-<text x="365" y="122" xml:space="preserve"><tspan fill="#953800">Editor: </tspan><tspan fill="#afb8c1">.............................. </tspan><tspan fill="#24292f">Neovim, VS Code</tspan></text>
-<text x="365" y="142" xml:space="preserve"><tspan fill="#953800">Virtualization: </tspan><tspan fill="#afb8c1">................... </tspan><tspan fill="#24292f">Docker, KVM / QEMU</tspan></text>
-<text x="365" y="182" xml:space="preserve"><tspan fill="#953800">Languages: </tspan><tspan fill="#afb8c1">....... </tspan><tspan fill="#24292f">Java, TypeScript, Python, SQL, Bash</tspan></text>
-<text x="365" y="202" xml:space="preserve"><tspan fill="#953800">Frameworks: </tspan><tspan fill="#afb8c1">............ </tspan><tspan fill="#24292f">Spring Boot, Next.js, Express</tspan></text>
-<text x="365" y="222" xml:space="preserve"><tspan fill="#953800">Databases: </tspan><tspan fill="#afb8c1">................ </tspan><tspan fill="#24292f">PostgreSQL, MySQL, MongoDB</tspan></text>
-<text x="365" y="242" xml:space="preserve"><tspan fill="#953800">Systems Focus: </tspan><tspan fill="#afb8c1">.. </tspan><tspan fill="#24292f">Backend APIs, Packet Analysis, Nginx</tspan></text>
-<text x="365" y="282" xml:space="preserve"><tspan fill="#0969da">─ Contact &amp; Links </tspan><tspan fill="#afb8c1">────────────────────────────────────</tspan></text>
-<text x="365" y="302" xml:space="preserve"><tspan fill="#953800">Portfolio: </tspan><tspan fill="#afb8c1">........................... </tspan><tspan fill="#24292f">amritesh.com.np</tspan></text>
-<text x="365" y="322" xml:space="preserve"><tspan fill="#953800">Email: </tspan><tspan fill="#afb8c1">....................... </tspan><tspan fill="#24292f">contact@amritesh.com.np</tspan></text>
-<text x="365" y="342" xml:space="preserve"><tspan fill="#953800">LinkedIn: </tspan><tspan fill="#afb8c1">......................... </tspan><tspan fill="#24292f">in/amriteshmishra0</tspan></text>
-<text x="365" y="382" xml:space="preserve"><tspan fill="#0969da">─ GitHub Verified Stats </tspan><tspan fill="#afb8c1">──────────────────────────────</tspan></text>
-<text x="365" y="402" xml:space="preserve"><tspan fill="#953800">Repos: </tspan><tspan fill="#afb8c1">. </tspan><tspan fill="#24292f">17 (Contributed: 3)</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Stars: </tspan><tspan fill="#afb8c1">.............. </tspan><tspan fill="#24292f">1</tspan></text>
-<text x="365" y="422" xml:space="preserve"><tspan fill="#953800">Commits: </tspan><tspan fill="#afb8c1">............... </tspan><tspan fill="#24292f">200</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Followers: </tspan><tspan fill="#afb8c1">.......... </tspan><tspan fill="#24292f">5</tspan></text>
-<text x="365" y="442" xml:space="preserve"><tspan fill="#953800">Lines of Code: </tspan><tspan fill="#24292f">151,897</tspan><tspan fill="#afb8c1"> ( </tspan><tspan fill="#1a7f37">157,394++</tspan><tspan fill="#afb8c1">, </tspan><tspan fill="#cf222e">5,497--</tspan><tspan fill="#afb8c1"> )</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" width="870" height="475" viewBox="0 0 870 475" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="13px">
+<rect x="0.5" y="0.5" width="869" height="474" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<text x="35" y="70" fill="#0969da" font-weight="bold" xml:space="preserve">               /\            </text>
+<text x="35" y="88" fill="#0969da" font-weight="bold" xml:space="preserve">              /  \           </text>
+<text x="35" y="106" fill="#0969da" font-weight="bold" xml:space="preserve">             / /\ \          </text>
+<text x="35" y="124" fill="#0969da" font-weight="bold" xml:space="preserve">            / /  \ \         </text>
+<text x="35" y="142" fill="#0969da" font-weight="bold" xml:space="preserve">           / /    \ \        </text>
+<text x="35" y="160" fill="#0969da" font-weight="bold" xml:space="preserve">          / /  /\  \ \       </text>
+<text x="35" y="178" fill="#0969da" font-weight="bold" xml:space="preserve">         / /  /  \  \ \      </text>
+<text x="35" y="196" fill="#0969da" font-weight="bold" xml:space="preserve">        /_/  / /\ \  \_\     </text>
+<text x="35" y="214" fill="#0969da" font-weight="bold" xml:space="preserve">        \ \  \ \/ /  / /     </text>
+<text x="35" y="232" fill="#0969da" font-weight="bold" xml:space="preserve">         \ \  \  /  / /      </text>
+<text x="35" y="250" fill="#0969da" font-weight="bold" xml:space="preserve">          \ \  \/  / /       </text>
+<text x="35" y="268" fill="#0969da" font-weight="bold" xml:space="preserve">           \ \    / /        </text>
+<text x="35" y="286" fill="#0969da" font-weight="bold" xml:space="preserve">            \ \  / /         </text>
+<text x="35" y="304" fill="#0969da" font-weight="bold" xml:space="preserve">             \ \/ /          </text>
+<text x="35" y="322" fill="#0969da" font-weight="bold" xml:space="preserve">              \  /           </text>
+<text x="35" y="340" fill="#0969da" font-weight="bold" xml:space="preserve">               \/            </text>
+<text x="35" y="358" fill="#0969da" font-weight="bold" xml:space="preserve">                             </text>
+<text x="35" y="376" fill="#0969da" font-weight="bold" xml:space="preserve">       // AMRIT-VERSE //     </text>
+<text x="35" y="394" fill="#0969da" font-weight="bold" xml:space="preserve">       SYSTEMS &amp; BACKEND     </text>
+<text x="365" y="45" xml:space="preserve"><tspan fill="#0969da">amrit@amrit-verse </tspan><tspan fill="#afb8c1">────────────────────────────────────</tspan></text>
+<text x="365" y="87" xml:space="preserve"><tspan fill="#953800">Identity: </tspan><tspan fill="#afb8c1">............. </tspan><tspan fill="#24292f">Amritesh Mishra (CS Undergrad)</tspan></text>
+<text x="365" y="108" xml:space="preserve"><tspan fill="#953800">Environment: </tspan><tspan fill="#afb8c1">........... </tspan><tspan fill="#24292f">Debian GNU/Linux (Bare Metal)</tspan></text>
+<text x="365" y="129" xml:space="preserve"><tspan fill="#953800">Shell &amp; Tools: </tspan><tspan fill="#afb8c1">............. </tspan><tspan fill="#24292f">Bash, Zsh, Neovim, Docker</tspan></text>
+<text x="365" y="150" xml:space="preserve"><tspan fill="#953800">Core Focus: </tspan><tspan fill="#afb8c1">........ </tspan><tspan fill="#24292f">Backend Systems, APIs, Networking</tspan></text>
+<text x="365" y="192" xml:space="preserve"><tspan fill="#953800">Languages: </tspan><tspan fill="#afb8c1">....... </tspan><tspan fill="#24292f">Java, TypeScript, Python, SQL, Bash</tspan></text>
+<text x="365" y="213" xml:space="preserve"><tspan fill="#953800">Backend: </tspan><tspan fill="#afb8c1">...... </tspan><tspan fill="#24292f">Spring Boot, Node.js, Express, Next.js</tspan></text>
+<text x="365" y="234" xml:space="preserve"><tspan fill="#953800">Databases: </tspan><tspan fill="#afb8c1">........ </tspan><tspan fill="#24292f">PostgreSQL, MySQL, MongoDB, Prisma</tspan></text>
+<text x="365" y="255" xml:space="preserve"><tspan fill="#953800">Infrastructure: </tspan><tspan fill="#afb8c1">. </tspan><tspan fill="#24292f">Docker Compose, Nginx, KVM/QEMU, Scapy</tspan></text>
+<text x="365" y="297" xml:space="preserve"><tspan fill="#0969da">─ Contact &amp; Profiles </tspan><tspan fill="#afb8c1">─────────────────────────────────</tspan></text>
+<text x="365" y="318" xml:space="preserve"><tspan fill="#953800">Website: </tspan><tspan fill="#afb8c1">............................. </tspan><tspan fill="#24292f">amritesh.com.np</tspan></text>
+<text x="365" y="339" xml:space="preserve"><tspan fill="#953800">Email: </tspan><tspan fill="#afb8c1">....................... </tspan><tspan fill="#24292f">contact@amritesh.com.np</tspan></text>
+<text x="365" y="360" xml:space="preserve"><tspan fill="#953800">LinkedIn: </tspan><tspan fill="#afb8c1">......................... </tspan><tspan fill="#24292f">in/amriteshmishra0</tspan></text>
+<text x="365" y="402" xml:space="preserve"><tspan fill="#0969da">─ Verified GitHub Metrics </tspan><tspan fill="#afb8c1">────────────────────────────</tspan></text>
+<text x="365" y="423" xml:space="preserve"><tspan fill="#953800">Repositories: </tspan><tspan fill="#afb8c1">. </tspan><tspan fill="#24292f">19 (Contributed: 4)</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Stars Earned: </tspan><tspan fill="#afb8c1">....... </tspan><tspan fill="#24292f">1</tspan></text>
+<text x="365" y="444" xml:space="preserve"><tspan fill="#953800">Contributions: </tspan><tspan fill="#afb8c1">. </tspan><tspan fill="#24292f">201 commits</tspan><tspan fill="#afb8c1"> | </tspan><tspan fill="#953800">Followers: </tspan><tspan fill="#afb8c1">.......... </tspan><tspan fill="#24292f">5</tspan></text>
 </svg>
