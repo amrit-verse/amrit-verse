@@ -1,7 +1,7 @@
 """Regenerate dark_mode.svg and light_mode.svg with live GitHub stats.
 
 Terminal-inspired profile card for amrit-verse featuring an original
-geometric 'AV' visual identity and verified system metrics.
+8-bit cyber companion motif with shades and verified system metrics.
 Runs automatically via GitHub Actions or locally with the gh CLI.
 Stdlib only — zero external package dependencies.
 """
@@ -17,49 +17,56 @@ USER = "amrit-verse"
 JOINED_YEAR = 2025  # GitHub account creation year
 W = 54              # Information column width in monospace characters
 
-# Original geometric AV (Amrit-Verse) terminal monogram
-AV_ART = [
-    r"               /\            ",
-    r"              /  \           ",
-    r"             / /\ \          ",
-    r"            / /  \ \         ",
-    r"           / /    \ \        ",
-    r"          / /  /\  \ \       ",
-    r"         / /  /  \  \ \      ",
-    r"        /_/  / /\ \  \_\     ",
-    r"        \ \  \ \/ /  / /     ",
-    r"         \ \  \  /  / /      ",
-    r"          \ \  \/  / /       ",
-    r"           \ \    / /        ",
-    r"            \ \  / /         ",
-    r"             \ \/ /          ",
-    r"              \  /           ",
-    r"               \/            ",
-    r"                             ",
-    r"       // AMRIT-VERSE //     ",
-    r"       SYSTEMS & BACKEND     ",
+# Original 16x16 pixel-art cyber companion wearing shades
+COMPANION_GRID = [
+    "..##........##..",
+    ".####......####.",
+    ".######..######.",
+    ".##############.",
+    "################",
+    "##WWWW####WWWW##",
+    "##WLLWWWWWWLLW##",
+    "##WLLWWWWWWLLW##",
+    "##WWWW####WWWW##",
+    "################",
+    "###RR##MM##RR###",  # Cheeks with nose in center
+    "#####MM##MM#####",  # Symmetric smile wings (:3)
+    ".##############.",
+    "..############..",
+    "...##########...",
+    "....##....##....",
 ]
 
 PALETTES = {
     "dark": {
         "bg": "#0d1117",
         "border": "#30363d",
-        "art": "#58a6ff",    # Tech Cyan/Blue
+        "#": "#58a6ff",      # Cyber Blue body
+        "W": "#ffffff",      # White sunglasses frame
+        "L": "#0d1117",      # Dark lenses
+        "R": "#f85149",      # Red/coral blush cheeks
+        "M": "#0d1117",      # Dark mouth
         "h": "#58a6ff",      # Accent Blue
         "k": "#ffa657",      # Key Orange/Amber
         "v": "#c9d1d9",      # Value White
         "d": "#484f58",      # Dot Leader Gray
+        "sub": "#484f58",    # Subtitle gray
         "g": "#3fb950",      # Green
         "r": "#f85149",      # Red
     },
     "light": {
         "bg": "#ffffff",
         "border": "#d0d7de",
-        "art": "#0969da",    # Tech Blue
+        "#": "#0969da",      # Rich Blue body
+        "W": "#24292f",      # Dark sunglasses frame
+        "L": "#ffffff",      # White lenses
+        "R": "#cf222e",      # Coral blush cheeks
+        "M": "#24292f",      # Dark mouth
         "h": "#0969da",      # Accent Blue
         "k": "#953800",      # Key Warm Brown
         "v": "#24292f",      # Value Dark
         "d": "#afb8c1",      # Dot Leader Gray
+        "sub": "#afb8c1",    # Subtitle gray
         "g": "#1a7f37",      # Green
         "r": "#cf222e",      # Red
     },
@@ -221,12 +228,25 @@ def render(mode, stats):
         f'<rect x="0.5" y="0.5" width="869" height="474" rx="12" fill="{p["bg"]}" stroke="{p["border"]}"/>',
     ]
 
-    # Render original AV visual identity on the left
-    for i, line in enumerate(AV_ART):
-        color = p["h"] if ("AMRIT-VERSE" in line or "SYSTEMS" in line) else p["art"]
-        out.append(
-            f'<text x="35" y="{70 + i * 18}" fill="{color}" font-weight="bold" xml:space="preserve">{html.escape(line)}</text>'
-        )
+    # Render original 8-bit cyber companion wearing shades
+    ps = 11
+    start_x = 75
+    start_y = 110
+    pixel_rects = []
+    for r, row in enumerate(COMPANION_GRID):
+        for c, ch in enumerate(row):
+            if ch in p and ch != "bg":
+                pixel_rects.append(
+                    f'<rect x="{start_x + c * ps}" y="{start_y + r * ps}" width="{ps}" height="{ps}" fill="{p[ch]}" rx="1.5"/>'
+                )
+    out.append("".join(pixel_rects))
+
+    out.append(
+        f'<text x="95" y="325" fill="{p["h"]}" font-weight="bold" font-size="13px" letter-spacing="1px" xml:space="preserve">// AMRIT-VERSE //</text>'
+    )
+    out.append(
+        f'<text x="105" y="348" fill="{p["sub"]}" font-weight="bold" font-size="12px" xml:space="preserve">terminal · companion</text>'
+    )
 
     # Render system & verified metrics on the right
     for i, segs in enumerate(info_lines(stats)):
