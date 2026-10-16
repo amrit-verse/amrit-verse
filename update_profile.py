@@ -1,28 +1,58 @@
 """Regenerate dark_mode.svg / light_mode.svg with live GitHub stats.
 
 Terminal / neofetch-style profile card for amrit-verse.
-Runs daily via GitHub Actions. Stdlib only, no third-party dependencies.
+Runs automatically via GitHub Actions. Self-updates stats and avatar.
 """
+import base64
 import calendar
 import html
+import io
 import json
 import os
 import subprocess
 import urllib.request
 from datetime import date, datetime, timezone
+from PIL import Image
 
 USER = "amrit-verse"
 
-# Customize your birthday (YYYY, MM, DD) below to calculate your uptime
+# Customize your birthday (YYYY, MM, DD) to calculate uptime
 BIRTHDAY = date(2005, 5, 10)
 
 JOINED_YEAR = 2025  # account creation year
 W = 56              # info column width in characters
 
-# Choose active ASCII art style: "PORTRAIT" or "DEBIAN"
-ACTIVE_ART = "PORTRAIT"
+# Style options: "PHOTO" (default, your actual avatar), "ASCII_PORTRAIT", "DEBIAN"
+IMAGE_STYLE = "PHOTO"
 
-PORTRAIT_ART = r"""
+PALETTES = {
+    "dark": {
+        "bg": "#0d1117",
+        "border": "#30363d",
+        "art": "#8b949e",
+        "h": "#58a6ff",
+        "k": "#ffa657",
+        "v": "#c9d1d9",
+        "d": "#484f58",
+        "g": "#3fb950",
+        "r": "#f85149",
+        "avatar_border": "#58a6ff",
+    },
+    "light": {
+        "bg": "#ffffff",
+        "border": "#d0d7de",
+        "art": "#57606a",
+        "h": "#0969da",
+        "k": "#953800",
+        "v": "#24292f",
+        "d": "#afb8c1",
+        "g": "#1a7f37",
+        "r": "#cf222e",
+        "avatar_border": "#0969da",
+    },
+}
+
+ASCII_PORTRAIT = r"""
               ..:::.
            .=*%@@@@%#=.
           -#%%%%%%@@@@%=
@@ -69,30 +99,32 @@ DEBIAN_ART = r"""
              `"Y$b._
                  `"""
 
-PALETTES = {
-    "dark": {
-        "bg": "#0d1117",
-        "border": "#30363d",
-        "art": "#8b949e",
-        "h": "#58a6ff",
-        "k": "#ffa657",
-        "v": "#c9d1d9",
-        "d": "#484f58",
-        "g": "#3fb950",
-        "r": "#f85149",
-    },
-    "light": {
-        "bg": "#ffffff",
-        "border": "#d0d7de",
-        "art": "#57606a",
-        "h": "#0969da",
-        "k": "#953800",
-        "v": "#24292f",
-        "d": "#afb8c1",
-        "g": "#1a7f37",
-        "r": "#cf222e",
-    },
-}
+
+def get_avatar_b64(user):
+    """Fetch the latest avatar from GitHub, optimize it, and encode to base64."""
+    # 1. Try downloading live avatar from GitHub
+    try:
+        url = f"https://github.com/{user}.png"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            img = Image.open(io.BytesIO(r.read())).convert("RGB")
+            resized = img.resize((340, 340), Image.Resampling.LANCZOS)
+            buf = io.BytesIO()
+            resized.save(buf, format="JPEG", quality=90)
+            return base64.b64encode(buf.getvalue()).decode("ascii")
+    except Exception as e:
+        print(f"Could not fetch avatar online ({e}), trying local fallback")
+
+    # 2. Local fallback
+    local_path = os.path.join(os.path.dirname(__file__), "avatar.png")
+    if os.path.exists(local_path):
+        img = Image.open(local_path).convert("RGB")
+        resized = img.resize((340, 340), Image.Resampling.LANCZOS)
+        buf = io.BytesIO()
+        resized.save(buf, format="JPEG", quality=90)
+        return base64.b64encode(buf.getvalue()).decode("ascii")
+
+    return ""
 
 
 def get_tokens():
@@ -193,7 +225,7 @@ def fetch_stats():
         "repos": 19,
         "contributed": 4,
         "stars": 1,
-        "commits": 198,
+        "commits": 199,
         "loc": 189854,
         "loc_add": 199443,
         "loc_del": 9589,
@@ -312,24 +344,44 @@ def info_lines(s):
     ]
 
 
-def render(mode, stats, art):
+def render(mode, stats, b64_avatar, art_text=None):
     p = PALETTES[mode]
-    out = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="850" height="515" viewBox="0 0 850 515" '
-        'font-family="ui-monospace, SFMono-Regular, \'SF Mono\', Menlo, Monaco, Consolas, \'Liberation Mono\', monospace" font-size="13px">',
-        f'<rect x="0.5" y="0.5" width="849" height="514" rx="10" fill="{p["bg"]}" stroke="{p["border"]}"/>',
-    ]
-    for i, line in enumerate(art.strip("\n").split("\n")):
-        out.append(
-            f'<text x="25" y="{50 + i * 16}" fill="{p["art"]}" xml:space="preserve">{html.escape(line)}</text>'
-        )
+    font_stack = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace"
+
+    if IMAGE_STYLE == "PHOTO" and b64_avatar:
+        out = [
+            f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+            f'width="870" height="515" viewBox="0 0 870 515" font-family="{font_stack}" font-size="13px">',
+            '<defs>',
+            '  <clipPath id="avatar-clip">',
+            '    <circle cx="185" cy="250" r="140" />',
+            '  </clipPath>',
+            '</defs>',
+            f'<rect x="0.5" y="0.5" width="869" height="514" rx="12" fill="{p["bg"]}" stroke="{p["border"]}"/>',
+            f'<circle cx="185" cy="250" r="144" fill="none" stroke="{p["avatar_border"]}" stroke-width="3" opacity="0.8"/>',
+            f'<circle cx="185" cy="250" r="141" fill="{p["bg"]}"/>',
+            f'<image x="45" y="110" width="280" height="280" clip-path="url(#avatar-clip)" href="data:image/jpeg;base64,{b64_avatar}" />',
+        ]
+        text_x = 405
+    else:
+        out = [
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="850" height="515" viewBox="0 0 850 515" '
+            f'font-family="{font_stack}" font-size="13px">',
+            f'<rect x="0.5" y="0.5" width="849" height="514" rx="10" fill="{p["bg"]}" stroke="{p["border"]}"/>',
+        ]
+        active_art = art_text or (ASCII_PORTRAIT if IMAGE_STYLE == "ASCII_PORTRAIT" else DEBIAN_ART)
+        for i, line in enumerate(active_art.strip("\n").split("\n")):
+            out.append(
+                f'<text x="25" y="{50 + i * 16}" fill="{p["art"]}" xml:space="preserve">{html.escape(line)}</text>'
+            )
+        text_x = 385
+
     for i, segs in enumerate(info_lines(stats)):
         if not segs:
             continue
         spans = "".join(f'<tspan fill="{p[c]}">{html.escape(t)}</tspan>' for t, c in segs)
-        out.append(
-            f'<text x="385" y="{45 + i * 21}" xml:space="preserve">{spans}</text>'
-        )
+        out.append(f'<text x="{text_x}" y="{45 + i * 21}" xml:space="preserve">{spans}</text>')
+
     out.append("</svg>")
     return "\n".join(out)
 
@@ -341,13 +393,13 @@ def selfcheck():
 if __name__ == "__main__":
     selfcheck()
     stats = fetch_stats()
-    print("Fetched stats:", stats)
+    print("Live stats:", stats)
 
-    art = PORTRAIT_ART if ACTIVE_ART == "PORTRAIT" else DEBIAN_ART
+    b64_avatar = get_avatar_b64(USER) if IMAGE_STYLE == "PHOTO" else ""
 
     for mode in PALETTES:
-        svg_content = render(mode, stats, art)
+        svg_content = render(mode, stats, b64_avatar)
         filename = f"{mode}_mode.svg"
         with open(filename, "w", encoding="utf-8") as f:
             f.write(svg_content)
-        print(f"Wrote {filename}")
+        print(f"Generated {filename}")
