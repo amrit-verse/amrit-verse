@@ -2,42 +2,61 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
     <source media="(prefers-color-scheme: light)" srcset="light_mode.svg">
-    <img alt="Amritesh Mishra - Systems & Profile Dashboard" src="dark_mode.svg" width="100%">
+    <img alt="Amritesh Mishra (amrit-verse) - Systems & Engineering Overview" src="dark_mode.svg" width="100%">
   </picture>
 </div>
 
-### About Me
+## About Me
 
-I’m Amritesh — a Computer Science Engineering student focused on backend architecture, Linux systems, and distributed web services. A daily Debian user, I build platforms using Java (Spring Boot), TypeScript/Next.js, and Python.
+I’m Amritesh, a Computer Science & Engineering undergraduate at Excel Engineering College with a focus on backend architecture, Linux systems, networking, and infrastructure.
 
-I care about what happens below the UI layer: multi-container orchestration with Docker, database schema design & indexing, network packet analysis with Scapy, and writing resilient REST APIs with strict runtime validation.
-
----
-
-### Featured Projects
-
-| Project | Stack | Overview |
-| :--- | :--- | :--- |
-| **[JSR Dealership Platform](https://github.com/amrit-verse/JSR)** | Next.js 16, Prisma, PostgreSQL, Auth.js | Production inventory management & dealership platform for Jay Shree Ram Bike Point featuring full-text search, role-based authorization, and Playwright E2E coverage. |
-| **[Network Packet Sniffer](https://github.com/amrit-verse/sniffer)** | Python, Scapy, Rich | Lightweight live traffic packet sniffer with protocol filtering, Rich terminal visualization, and PCAP/CSV export for network security auditing. |
-| **[Library Management Backend](https://github.com/amrit-verse/library-management-system)** | Java, Spring Boot, MySQL, Docker | RESTful library service with request payload validation constraints, checkout workflows, and Docker Compose containerization. |
-| **[ShopEase eCommerce](https://github.com/amrit-verse/shopease)** | React, Node.js, Express, MongoDB, Nginx | Modular full-stack store with custom Zod endpoint shielding, stateless JWT auth in HTTP-only cookies, and an Nginx reverse proxy. |
-| **[Security Vulnerability Lab](https://github.com/amrit-verse/secure-coding-review)** | Python, Static Analysis, Bandit | Vulnerability analysis repository examining common web flaws (injection, broken auth), exploit demonstrations, and secure remediation patches. |
+Most of my day-to-day engineering happens in terminal environments on bare-metal Debian Linux. I enjoy working where software meets systems: designing relational schemas and API contracts, understanding packet flows and network boundaries, orchestrating containerized services with Docker, and writing clean, type-safe backend code in Java (Spring Boot), TypeScript/Next.js, and Python.
 
 ---
 
-### Dev Environment & Toolkit
+## Featured Work & Systems Projects
 
-- **Host OS**: Debian GNU/Linux 12 (bare metal)
-- **Languages**: Java, TypeScript, JavaScript, Python, SQL, Bash
-- **Backend & Web**: Spring Boot, Node.js, Express.js, Next.js (App Router), React
-- **Data & Storage**: PostgreSQL (Neon), MySQL, MongoDB (Atlas), Prisma ORM
-- **Infrastructure & Systems**: Docker, Docker Compose, Nginx, KVM/QEMU, Linux Systemd, Wireshark, Git
+Here are a few real-world applications and systems tools I’ve engineered and maintain:
+
+### 1. [JSR — Dealership & Inventory Management Platform](https://github.com/amrit-verse/JSR)
+* **Stack**: Next.js 16 (App Router), React 19, TypeScript, Prisma ORM, Neon PostgreSQL, Auth.js v5, Tailwind CSS, Playwright
+* A production full-stack platform built for an active commercial automobile dealership (*Jay Shree Ram Bike Point*) in Muzaffarpur, Bihar.
+* Features server-side data streaming, full inventory tracking, multi-tier role authorization, transactional database operations via Prisma, and end-to-end integration tests with Playwright.
+
+### 2. [sniffer — Live Network Packet Analyzer](https://github.com/amrit-verse/sniffer)
+* **Stack**: Python 3, Scapy, Rich CLI
+* A lightweight, terminal-based network packet sniffer designed for live traffic inspection, protocol auditing (TCP, UDP, ICMP, DNS, HTTP), and forensic packet analysis.
+* Includes real-time ANSI terminal formatting, BPF protocol filtering, and formatted PCAP / CSV export for offline inspection in Wireshark.
+
+### 3. [secure-coding-review — AppSec & Remediation Lab](https://github.com/amrit-verse/secure-coding-review)
+* **Stack**: Python, Flask, Bandit, Static Application Security Testing (SAST)
+* An applied cybersecurity lab documenting common web application vulnerabilities (SQL injection, broken access control, insecure deserialization, command injection).
+* Contains side-by-side vulnerable implementations, remediated patches following OWASP principles, and static analysis security audit reports.
+
+### 4. [library-management-system — REST Backend](https://github.com/amrit-verse/library-management-system)
+* **Stack**: Java 17, Spring Boot, Spring Data JPA, MySQL, Docker Compose
+* A full-stack library management system featuring a layered architecture (Controller-Service-Repository), payload validation constraints via `spring-boot-starter-validation`, member checkout workflows, and multi-container Docker Compose deployment.
+
+### 5. [shopease — E-Commerce Service](https://github.com/amrit-verse/shopease)
+* **Stack**: Node.js, Express.js, React, MongoDB, Mongoose, Zod, Nginx
+* An e-commerce service implementing custom Zod middleware for strict runtime request validation, stateless JWT authentication stored in secure HTTP-only cookies, and reverse-proxy routing configured through Nginx.
 
 ---
 
-### Connect
+## Technical Toolkit
 
-- **Website**: [amritesh.com.np](https://amritesh.com.np)
-- **LinkedIn**: [linkedin.com/in/amriteshmishra0](https://www.linkedin.com/in/amriteshmishra0)
-- **Email**: [contact@amritesh.com.np](mailto:contact@amritesh.com.np)
+* **Languages**: Java, TypeScript, JavaScript, Python, SQL, Bash
+* **Backend Frameworks**: Spring Boot, Node.js, Express.js, Next.js (App Router)
+* **Databases & ORMs**: PostgreSQL, MySQL, MongoDB, Prisma, Spring Data JPA
+* **Systems & Infrastructure**: Debian GNU/Linux (Daily Driver), Docker & Docker Compose, Nginx Reverse Proxy, KVM / QEMU, Linux Systemd
+* **Networking & Security**: Scapy, Wireshark, Nmap, TCP/IP Suite, JWT & RBAC Auth, SAST / Bandit
+* **Workflow & Tooling**: Git & GitHub Actions, Neovim, VS Code, Postman, Linux CLI
+
+---
+
+## Connect & Profiles
+
+* **Personal Website**: [amritesh.com.np](https://amritesh.com.np)
+* **Email**: [contact@amritesh.com.np](mailto:contact@amritesh.com.np)
+* **LinkedIn**: [linkedin.com/in/amriteshmishra0](https://www.linkedin.com/in/amriteshmishra0)
+* **GitHub**: [github.com/amrit-verse](https://github.com/amrit-verse)

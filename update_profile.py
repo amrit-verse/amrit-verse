@@ -1,7 +1,9 @@
-"""Regenerate dark_mode.svg / light_mode.svg with live GitHub stats.
+"""Regenerate dark_mode.svg and light_mode.svg with live GitHub stats.
 
-Debian-native terminal / fastfetch profile card for amrit-verse.
-Runs automatically via GitHub Actions. Stdlib only.
+Terminal-inspired profile card for amrit-verse featuring an original
+geometric 'AV' visual identity and verified system metrics.
+Runs automatically via GitHub Actions or locally with the gh CLI.
+Stdlib only — zero external package dependencies.
 """
 import calendar
 import html
@@ -9,54 +11,57 @@ import json
 import os
 import subprocess
 import urllib.request
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 
 USER = "amrit-verse"
-JOINED_YEAR = 2025  # account creation year
-W = 54              # info column width in characters
+JOINED_YEAR = 2025  # GitHub account creation year
+W = 54              # Information column width in monospace characters
 
-DEBIAN_LINES = [
-    r'        _,met$$$$$gg.',
-    r'     ,g$$$$$$$$$$$$$$$P.',
-    r'   ,g$$P"        """Y$$.".',
-    r'  ,$$P\'              `$$$.',
-    r' \',$$P       ,ggs.     `$$b:',
-    r' `d$$\'     ,$P"\'   .    $$$',
-    r'  $$P      d$\'     ,    $$$P',
-    r'  $$:      $$.   -    ,d$$\'',
-    r'  $$;      Y$b._   _,d$P\'',
-    r'  Y$$.    `.`"Y$$$$P"\'',
-    r'  `$$b      "-.__',
-    r'   `Y$$',
-    r'    `Y$$.',
-    r'      `$$b.',
-    r'        `Y$$b.',
-    r'           `"Y$b._',
-    r'               `"""',
+# Original geometric AV (Amrit-Verse) terminal monogram
+AV_ART = [
+    r"               /\            ",
+    r"              /  \           ",
+    r"             / /\ \          ",
+    r"            / /  \ \         ",
+    r"           / /    \ \        ",
+    r"          / /  /\  \ \       ",
+    r"         / /  /  \  \ \      ",
+    r"        /_/  / /\ \  \_\     ",
+    r"        \ \  \ \/ /  / /     ",
+    r"         \ \  \  /  / /      ",
+    r"          \ \  \/  / /       ",
+    r"           \ \    / /        ",
+    r"            \ \  / /         ",
+    r"             \ \/ /          ",
+    r"              \  /           ",
+    r"               \/            ",
+    r"                             ",
+    r"       // AMRIT-VERSE //     ",
+    r"       SYSTEMS & BACKEND     ",
 ]
 
 PALETTES = {
     "dark": {
         "bg": "#0d1117",
         "border": "#30363d",
-        "art": "#e9546b",    # Debian Red
-        "h": "#58a6ff",      # Header Blue
+        "art": "#58a6ff",    # Tech Cyan/Blue
+        "h": "#58a6ff",      # Accent Blue
         "k": "#ffa657",      # Key Orange/Amber
         "v": "#c9d1d9",      # Value White
-        "d": "#484f58",      # Dot Gray
-        "g": "#3fb950",      # Green additions
-        "r": "#f85149",      # Red deletions
+        "d": "#484f58",      # Dot Leader Gray
+        "g": "#3fb950",      # Green
+        "r": "#f85149",      # Red
     },
     "light": {
         "bg": "#ffffff",
         "border": "#d0d7de",
-        "art": "#d70a53",    # Debian Red
-        "h": "#0969da",      # Header Blue
-        "k": "#953800",      # Key Brown
+        "art": "#0969da",    # Tech Blue
+        "h": "#0969da",      # Accent Blue
+        "k": "#953800",      # Key Warm Brown
         "v": "#24292f",      # Value Dark
-        "d": "#afb8c1",      # Dot Gray
-        "g": "#1a7f37",      # Green additions
-        "r": "#cf222e",      # Red deletions
+        "d": "#afb8c1",      # Dot Leader Gray
+        "g": "#1a7f37",      # Green
+        "r": "#cf222e",      # Red
     },
 }
 
@@ -83,10 +88,10 @@ def gh(url, payload=None, token=None):
         headers={
             "Authorization": f"Bearer {token or TOKEN}",
             "Accept": "application/vnd.github+json",
-            "User-Agent": "debian-fastfetch-updater",
+            "User-Agent": "amrit-verse-card-updater",
         },
     )
-    with urllib.request.urlopen(req) as r:
+    with urllib.request.urlopen(req, timeout=15) as r:
         return r.status, json.loads(r.read() or "{}")
 
 
@@ -97,68 +102,30 @@ def graphql(query, variables=None, token=None):
         token,
     )
     if resp.get("errors"):
-        print("GraphQL error:", resp["errors"])
+        print("GraphQL warning:", resp["errors"])
         return None
     return resp.get("data")
 
 
-LOC_QUERY = """
-query($owner: String!, $name: String!, $id: ID!, $cursor: String) {
-  repository(owner: $owner, name: $name) {
-    defaultBranchRef { target { ... on Commit {
-      history(first: 100, author: {id: $id}, after: $cursor) {
-        pageInfo { hasNextPage endCursor }
-        nodes { additions deletions }
-      }
-    } } }
-  }
-}"""
-
-
-def loc(repo_names, user_id):
-    add = rem = 0
-    for name in repo_names:
-        cursor = None
-        try:
-            while True:
-                data = graphql(
-                    LOC_QUERY,
-                    {"owner": USER, "name": name, "id": user_id, "cursor": cursor},
-                    token=PRIV_TOKEN,
-                )
-                if not data or not data.get("repository"):
-                    break
-                ref = data["repository"].get("defaultBranchRef")
-                if ref is None:
-                    break
-                h = ref["target"]["history"]
-                add += sum(n["additions"] for n in h["nodes"])
-                rem += sum(n["deletions"] for n in h["nodes"])
-                if not h["pageInfo"]["hasNextPage"]:
-                    break
-                cursor = h["pageInfo"]["endCursor"]
-        except Exception as e:
-            print(f"loc {name}: {e}")
-    return {"loc_add": add, "loc_del": rem, "loc": add - rem}
-
-
 def fetch_stats():
+    """Fetch verified dynamic statistics from GitHub GraphQL API."""
     fallback = {
         "followers": 5,
         "repos": 19,
         "contributed": 4,
         "stars": 1,
-        "commits": 199,
-        "loc": 190230,
-        "loc_add": 199919,
-        "loc_del": 9689,
+        "commits": 201,
     }
 
+    if not TOKEN and not PRIV_TOKEN:
+        return fallback
+
     try:
+        current_year = datetime.now(timezone.utc).year
         yr_aliases = "\n".join(
             f'y{y}: contributionsCollection(from: "{y}-01-01T00:00:00Z", to: "{y + 1}-01-01T00:00:00Z")'
             " { totalCommitContributions restrictedContributionsCount }"
-            for y in range(JOINED_YEAR, datetime.now(timezone.utc).year + 1)
+            for y in range(JOINED_YEAR, current_year + 1)
         )
         contrib_data = graphql(f'query {{ user(login: "{USER}") {{ {yr_aliases} }} }}')
         if contrib_data and contrib_data.get("user"):
@@ -173,13 +140,12 @@ def fetch_stats():
             f"""
         query {{
           user(login: "{USER}") {{
-            id
             followers {{ totalCount }}
             repositories(first: 100, ownerAffiliations: OWNER) {{
               totalCount
-              nodes {{ name stargazerCount isFork }}
+              nodes {{ stargazerCount isFork }}
             }}
-            repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, PULL_REQUEST, REPOSITORY]) {{
+            repositoriesContributedTo(contributionTypes: [COMMIT, PULL_REQUEST, REPOSITORY]) {{
               totalCount
             }}
           }}
@@ -191,23 +157,17 @@ def fetch_stats():
             return fallback
 
         u = u_data["user"]
-        stats = {
+        repos_nodes = u["repositories"]["nodes"]
+        return {
             "followers": u["followers"]["totalCount"],
             "repos": u["repositories"]["totalCount"],
             "contributed": u["repositoriesContributedTo"]["totalCount"],
-            "stars": sum(n["stargazerCount"] for n in u["repositories"]["nodes"]),
+            "stars": sum(n["stargazerCount"] for n in repos_nodes),
             "commits": commits,
         }
 
-        repo_names = [
-            n["name"] for n in u["repositories"]["nodes"] if not n["isFork"]
-        ]
-        loc_stats = loc(repo_names, u["id"])
-        stats.update(loc_stats)
-        return stats
-
     except Exception as e:
-        print(f"Error fetching stats: {e}, using fallback")
+        print(f"Error fetching stats dynamically: {e}; using fallback.")
         return fallback
 
 
@@ -231,33 +191,24 @@ def info_lines(s):
     return [
         [(f"amrit@{USER} ", "h"), ("─" * (W - len(USER) - 7), "d")],
         [],
-        kv("OS", "Debian GNU/Linux (bare-metal)"),
-        kv("Shell", "bash, zsh"),
-        kv("Editor", "Neovim, VS Code"),
-        kv("Virtualization", "Docker, KVM / QEMU"),
+        kv("Identity", "Amritesh Mishra (CS Undergrad)"),
+        kv("Environment", "Debian GNU/Linux (Bare Metal)"),
+        kv("Shell & Tools", "Bash, Zsh, Neovim, Docker"),
+        kv("Core Focus", "Backend Systems, APIs, Networking"),
         [],
         kv("Languages", "Java, TypeScript, Python, SQL, Bash"),
-        kv("Frameworks", "Spring Boot, Next.js, Express"),
-        kv("Databases", "PostgreSQL, MySQL, MongoDB"),
-        kv("Systems Focus", "Backend APIs, Packet Analysis, Nginx"),
+        kv("Backend", "Spring Boot, Node.js, Express, Next.js"),
+        kv("Databases", "PostgreSQL, MySQL, MongoDB, Prisma"),
+        kv("Infrastructure", "Docker Compose, Nginx, KVM/QEMU, Scapy"),
         [],
-        rule("Contact & Links"),
-        kv("Portfolio", "amritesh.com.np"),
+        rule("Contact & Profiles"),
+        kv("Website", "amritesh.com.np"),
         kv("Email", "contact@amritesh.com.np"),
         kv("LinkedIn", "in/amriteshmishra0"),
         [],
-        rule("GitHub Verified Stats"),
-        kv2("Repos", f"{s['repos']} (Contributed: {s['contributed']})", "Stars", n(s["stars"])),
-        kv2("Commits", n(s["commits"]), "Followers", n(s["followers"])),
-        [
-            ("Lines of Code: ", "k"),
-            (n(s["loc"]), "v"),
-            (" ( ", "d"),
-            (n(s["loc_add"]) + "++", "g"),
-            (", ", "d"),
-            (n(s["loc_del"]) + "--", "r"),
-            (" )", "d"),
-        ],
+        rule("Verified GitHub Metrics"),
+        kv2("Repositories", f"{s['repos']} (Contributed: {s['contributed']})", "Stars Earned", n(s["stars"])),
+        kv2("Contributions", f"{n(s['commits'])} commits", "Followers", n(s["followers"])),
     ]
 
 
@@ -265,34 +216,37 @@ def render(mode, stats):
     p = PALETTES[mode]
     font_stack = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace"
     out = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="870" height="490" viewBox="0 0 870 490" '
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="870" height="475" viewBox="0 0 870 475" '
         f'font-family="{font_stack}" font-size="13px">',
-        f'<rect x="0.5" y="0.5" width="869" height="489" rx="12" fill="{p["bg"]}" stroke="{p["border"]}"/>',
+        f'<rect x="0.5" y="0.5" width="869" height="474" rx="12" fill="{p["bg"]}" stroke="{p["border"]}"/>',
     ]
-    # Draw Debian spiral centered on left
-    for i, line in enumerate(DEBIAN_LINES):
+
+    # Render original AV visual identity on the left
+    for i, line in enumerate(AV_ART):
+        color = p["h"] if ("AMRIT-VERSE" in line or "SYSTEMS" in line) else p["art"]
         out.append(
-            f'<text x="35" y="{85 + i * 19}" fill="{p["art"]}" font-weight="bold" xml:space="preserve">{html.escape(line)}</text>'
+            f'<text x="35" y="{70 + i * 18}" fill="{color}" font-weight="bold" xml:space="preserve">{html.escape(line)}</text>'
         )
 
+    # Render system & verified metrics on the right
     for i, segs in enumerate(info_lines(stats)):
         if not segs:
             continue
         spans = "".join(f'<tspan fill="{p[c]}">{html.escape(t)}</tspan>' for t, c in segs)
-        out.append(f'<text x="365" y="{42 + i * 20}" xml:space="preserve">{spans}</text>')
+        out.append(f'<text x="365" y="{45 + i * 21}" xml:space="preserve">{spans}</text>')
 
     out.append("</svg>")
     return "\n".join(out)
 
 
 def selfcheck():
-    assert len("".join(t for t, _ in kv("OS", "Debian GNU/Linux (bare-metal)"))) == W
+    assert len("".join(t for t, _ in kv("Environment", "Debian GNU/Linux (Bare Metal)"))) == W
 
 
 if __name__ == "__main__":
     selfcheck()
     stats = fetch_stats()
-    print("Live stats:", stats)
+    print("Fetched verified stats:", stats)
 
     for mode in PALETTES:
         svg_content = render(mode, stats)
