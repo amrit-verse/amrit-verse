@@ -1,7 +1,7 @@
 """Regenerate dark_mode.svg and light_mode.svg with live GitHub stats.
 
-Terminal-inspired profile card for amrit-verse featuring an original
-8-bit cyber companion motif with shades and verified system metrics.
+Terminal-inspired profile card for amrit-verse featuring the iconic
+'Sic Mundus Creatus Est' Triquetra motif from DARK and verified system metrics.
 Runs automatically via GitHub Actions or locally with the gh CLI.
 Stdlib only — zero external package dependencies.
 """
@@ -17,58 +17,76 @@ USER = "amrit-verse"
 JOINED_YEAR = 2025  # GitHub account creation year
 W = 54              # Information column width in monospace characters
 
-# Original 16x16 pixel-art cyber companion wearing shades
-COMPANION_GRID = [
-    "..##........##..",
-    ".####......####.",
-    ".######..######.",
-    ".##############.",
-    "################",
-    "##WWWW####WWWW##",
-    "##WLLWWWWWWLLW##",
-    "##WLLWWWWWWLLW##",
-    "##WWWW####WWWW##",
-    "################",
-    "###RR##MM##RR###",  # Cheeks with nose in center
-    "#####MM##MM#####",  # Symmetric smile wings (:3)
-    ".##############.",
-    "..############..",
-    "...##########...",
-    "....##....##....",
-]
+
+TRIQUETRA_PATH = (
+    "M742 1423 c-198 -134 -306 -315 -347 -583 -4 -30 -15 -41 -67 -75 "
+    "-184 -118 -282 -283 -318 -530 -15 -110 -15 -111 35 -141 170 -99 456 -111 "
+    "684 -29 l68 25 58 -25 c105 -47 177 -59 345 -58 169 0 270 19 354 66 l41 23 "
+    "-1 90 c-3 209 -93 392 -256 519 -39 30 -83 63 -99 72 -23 14 -30 26 -34 62 "
+    "-23 184 -51 273 -114 373 -67 107 -230 249 -283 248 -7 -1 -37 -17 -66 -37z "
+    "m134 -44 c61 -38 162 -158 205 -243 98 -198 104 -474 16 -661 -39 -82 -152 "
+    "-235 -173 -235 -8 0 -32 12 -54 26 l-40 27 63 66 c112 119 170 269 170 441 -1 "
+    "173 -57 313 -171 426 -36 35 -71 64 -77 64 -22 0 -94 -59 -135 -112 -55 -69 "
+    "-85 -129 -114 -230 -23 -82 -24 -83 -70 -102 -25 -11 -48 -17 -51 -14 -9 9 42 "
+    "191 73 260 38 84 78 143 139 204 105 105 154 123 219 83z m-13 -196 c26 -26 "
+    "62 -76 81 -112 37 -71 73 -177 64 -187 -3 -3 -33 0 -67 7 -38 7 -113 10 -197 "
+    "7 l-136 -5 5 40 c9 63 64 163 129 233 33 35 64 64 68 64 4 0 28 -21 53 -47z "
+    "m34 -344 c113 -15 113 -15 113 -57 0 -60 -6 -63 -85 -45 -84 18 -239 12 -330 "
+    "-11 -142 -38 -277 -130 -344 -235 -33 -51 -84 -181 -95 -243 -12 -67 46 -96 "
+    "211 -105 84 -5 119 -2 203 17 l101 23 27 -27 c33 -32 29 -36 -73 -69 -60 -19 "
+    "-92 -22 -220 -22 -133 0 -157 3 -215 24 -35 13 -81 34 -100 47 -36 24 -36 25 "
+    "-32 82 18 272 199 501 464 586 135 43 241 53 375 35z m364 -140 c67 -43 168 "
+    "-153 207 -226 39 -75 70 -187 73 -274 3 -63 2 -64 -31 -87 -62 -42 -133 -56 "
+    "-285 -56 -149 -1 -208 9 -317 50 -184 70 -341 228 -425 428 -18 43 -32 80 -31 "
+    "81 2 1 22 12 46 24 40 20 43 21 49 4 54 -156 101 -238 190 -327 109 -109 250 "
+    "-171 410 -182 87 -5 213 10 276 35 25 10 27 14 21 53 -19 143 -78 253 -187 "
+    "355 l-67 62 6 46 c4 25 9 45 12 45 3 0 27 -14 53 -31z m-320 -22 c42 -13 44 "
+    "-15 43 -50 -2 -58 -60 -165 -125 -229 -32 -32 -64 -58 -72 -58 -20 0 -86 80 "
+    "-125 150 -26 46 -62 146 -62 171 0 7 65 26 115 33 48 7 177 -3 226 -17z m-489 "
+    "-205 c26 -53 72 -128 103 -166 30 -38 55 -73 55 -77 0 -14 -144 -41 -220 -42 "
+    "-76 0 -176 18 -186 34 -9 15 25 119 63 191 34 66 110 158 129 158 5 -1 30 -45 "
+    "56 -98z m797 43 c56 -53 102 -133 127 -224 17 -61 17 -64 0 -77 -26 -19 -107 "
+    "-34 -182 -34 -72 0 -204 26 -204 41 0 5 25 41 56 81 51 66 134 219 134 246 0 "
+    "22 21 12 69 -33z"
+)
+
+
+def make_triquetra(color, tx=82, ty=85, scale=1.25):
+    """Render the pure interlaced Celtic Triquetra knot."""
+    return (
+        f'<g transform="translate({tx}, {ty}) scale({scale})">'
+        f'<g transform="translate(0, 146) scale(0.1, -0.1)" fill="{color}">'
+        f'<path d="{TRIQUETRA_PATH}"/>'
+        f"</g></g>"
+    )
+
 
 PALETTES = {
     "dark": {
         "bg": "#0d1117",
         "border": "#30363d",
-        "#": "#58a6ff",      # Cyber Blue body
-        "W": "#ffffff",      # White sunglasses frame
-        "L": "#0d1117",      # Dark lenses
-        "R": "#f85149",      # Red/coral blush cheeks
-        "M": "#0d1117",      # Dark mouth
-        "h": "#58a6ff",      # Accent Blue
-        "k": "#ffa657",      # Key Orange/Amber
-        "v": "#c9d1d9",      # Value White
-        "d": "#484f58",      # Dot Leader Gray
-        "sub": "#484f58",    # Subtitle gray
-        "g": "#3fb950",      # Green
-        "r": "#f85149",      # Red
+        "symbol": "#58a6ff",      # Tech Cyan Triquetra knot
+        "gold": "#ffa657",        # Amber Gold ("Sic Mundus Creatus Est")
+        "h": "#58a6ff",           # Accent Blue
+        "k": "#ffa657",           # Key Orange/Amber
+        "v": "#c9d1d9",           # Value White
+        "d": "#484f58",           # Dot Leader Gray
+        "sub": "#8b949e",         # Subtitle gray
+        "g": "#3fb950",           # Green
+        "r": "#f85149",           # Red
     },
     "light": {
         "bg": "#ffffff",
         "border": "#d0d7de",
-        "#": "#0969da",      # Rich Blue body
-        "W": "#24292f",      # Dark sunglasses frame
-        "L": "#ffffff",      # White lenses
-        "R": "#cf222e",      # Coral blush cheeks
-        "M": "#24292f",      # Dark mouth
-        "h": "#0969da",      # Accent Blue
-        "k": "#953800",      # Key Warm Brown
-        "v": "#24292f",      # Value Dark
-        "d": "#afb8c1",      # Dot Leader Gray
-        "sub": "#afb8c1",    # Subtitle gray
-        "g": "#1a7f37",      # Green
-        "r": "#cf222e",      # Red
+        "symbol": "#0969da",      # Deep Tech Blue Triquetra knot
+        "gold": "#953800",        # Warm Bronze ("Sic Mundus Creatus Est")
+        "h": "#0969da",           # Accent Blue
+        "k": "#953800",           # Key Warm Brown
+        "v": "#24292f",           # Value Dark
+        "d": "#afb8c1",           # Dot Leader Gray
+        "sub": "#6e7781",         # Subtitle gray
+        "g": "#1a7f37",           # Green
+        "r": "#cf222e",           # Red
     },
 }
 
@@ -228,24 +246,18 @@ def render(mode, stats):
         f'<rect x="0.5" y="0.5" width="869" height="474" rx="12" fill="{p["bg"]}" stroke="{p["border"]}"/>',
     ]
 
-    # Render original 8-bit cyber companion wearing shades
-    ps = 11
-    start_x = 75
-    start_y = 110
-    pixel_rects = []
-    for r, row in enumerate(COMPANION_GRID):
-        for c, ch in enumerate(row):
-            if ch in p and ch != "bg":
-                pixel_rects.append(
-                    f'<rect x="{start_x + c * ps}" y="{start_y + r * ps}" width="{ps}" height="{ps}" fill="{p[ch]}" rx="1.5"/>'
-                )
-    out.append("".join(pixel_rects))
+    # Render pure Triquetra knot
+    out.append(make_triquetra(p["symbol"], tx=82, ty=85, scale=1.25))
 
+    # Inscription & labels
     out.append(
-        f'<text x="95" y="325" fill="{p["h"]}" font-weight="bold" font-size="13px" letter-spacing="1px" xml:space="preserve">// AMRIT-VERSE //</text>'
+        f'<text x="182" y="318" text-anchor="middle" fill="{p["gold"]}" font-weight="bold" font-size="13px" letter-spacing="2.5px" xml:space="preserve">SIC MUNDUS CREATUS EST</text>'
     )
     out.append(
-        f'<text x="105" y="348" fill="{p["sub"]}" font-weight="bold" font-size="12px" xml:space="preserve">terminal · companion</text>'
+        f'<text x="182" y="343" text-anchor="middle" fill="{p["h"]}" font-weight="bold" font-size="12px" letter-spacing="1.5px" xml:space="preserve">// AMRIT-VERSE //</text>'
+    )
+    out.append(
+        f'<text x="182" y="365" text-anchor="middle" fill="{p["sub"]}" font-size="11px" letter-spacing="2px" xml:space="preserve">1953 · 1986 · 2019</text>'
     )
 
     # Render system & verified metrics on the right
