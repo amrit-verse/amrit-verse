@@ -18,19 +18,46 @@ JOINED_YEAR = 2025  # GitHub account creation year
 W = 54              # Information column width in monospace characters
 
 
-def make_triquetra(stroke_color, bg_color, tx=85, ty=82, scale=0.55):
-    """Render the iconic interlaced Triquetra and circle knot from DARK."""
+TRIQUETRA_PATH = (
+    "M742 1423 c-198 -134 -306 -315 -347 -583 -4 -30 -15 -41 -67 -75 "
+    "-184 -118 -282 -283 -318 -530 -15 -110 -15 -111 35 -141 170 -99 456 -111 "
+    "684 -29 l68 25 58 -25 c105 -47 177 -59 345 -58 169 0 270 19 354 66 l41 23 "
+    "-1 90 c-3 209 -93 392 -256 519 -39 30 -83 63 -99 72 -23 14 -30 26 -34 62 "
+    "-23 184 -51 273 -114 373 -67 107 -230 249 -283 248 -7 -1 -37 -17 -66 -37z "
+    "m134 -44 c61 -38 162 -158 205 -243 98 -198 104 -474 16 -661 -39 -82 -152 "
+    "-235 -173 -235 -8 0 -32 12 -54 26 l-40 27 63 66 c112 119 170 269 170 441 -1 "
+    "173 -57 313 -171 426 -36 35 -71 64 -77 64 -22 0 -94 -59 -135 -112 -55 -69 "
+    "-85 -129 -114 -230 -23 -82 -24 -83 -70 -102 -25 -11 -48 -17 -51 -14 -9 9 42 "
+    "191 73 260 38 84 78 143 139 204 105 105 154 123 219 83z m-13 -196 c26 -26 "
+    "62 -76 81 -112 37 -71 73 -177 64 -187 -3 -3 -33 0 -67 7 -38 7 -113 10 -197 "
+    "7 l-136 -5 5 40 c9 63 64 163 129 233 33 35 64 64 68 64 4 0 28 -21 53 -47z "
+    "m34 -344 c113 -15 113 -15 113 -57 0 -60 -6 -63 -85 -45 -84 18 -239 12 -330 "
+    "-11 -142 -38 -277 -130 -344 -235 -33 -51 -84 -181 -95 -243 -12 -67 46 -96 "
+    "211 -105 84 -5 119 -2 203 17 l101 23 27 -27 c33 -32 29 -36 -73 -69 -60 -19 "
+    "-92 -22 -220 -22 -133 0 -157 3 -215 24 -35 13 -81 34 -100 47 -36 24 -36 25 "
+    "-32 82 18 272 199 501 464 586 135 43 241 53 375 35z m364 -140 c67 -43 168 "
+    "-153 207 -226 39 -75 70 -187 73 -274 3 -63 2 -64 -31 -87 -62 -42 -133 -56 "
+    "-285 -56 -149 -1 -208 9 -317 50 -184 70 -341 228 -425 428 -18 43 -32 80 -31 "
+    "81 2 1 22 12 46 24 40 20 43 21 49 4 54 -156 101 -238 190 -327 109 -109 250 "
+    "-171 410 -182 87 -5 213 10 276 35 25 10 27 14 21 53 -19 143 -78 253 -187 "
+    "355 l-67 62 6 46 c4 25 9 45 12 45 3 0 27 -14 53 -31z m-320 -22 c42 -13 44 "
+    "-15 43 -50 -2 -58 -60 -165 -125 -229 -32 -32 -64 -58 -72 -58 -20 0 -86 80 "
+    "-125 150 -26 46 -62 146 -62 171 0 7 65 26 115 33 48 7 177 -3 226 -17z m-489 "
+    "-205 c26 -53 72 -128 103 -166 30 -38 55 -73 55 -77 0 -14 -144 -41 -220 -42 "
+    "-76 0 -176 18 -186 34 -9 15 25 119 63 191 34 66 110 158 129 158 5 -1 30 -45 "
+    "56 -98z m797 43 c56 -53 102 -133 127 -224 17 -61 17 -64 0 -77 -26 -19 -107 "
+    "-34 -182 -34 -72 0 -204 26 -204 41 0 5 25 41 56 81 51 66 134 219 134 246 0 "
+    "22 21 12 69 -33z"
+)
+
+
+def make_triquetra(color, tx=82, ty=85, scale=1.25):
+    """Render the pure interlaced Celtic Triquetra knot."""
     return (
         f'<g transform="translate({tx}, {ty}) scale({scale})">'
-        f'<g transform="translate(-124,739.7) scale(0.1,-0.1)" fill="none">'
-        f'<circle cx="3000" cy="5382.05" r="1164" stroke-width="336" stroke="{bg_color}" />'
-        f'<circle cx="3000" cy="5382.05" r="1164" stroke-width="168" stroke="{stroke_color}" />'
-        f'<path d="M4512.79,4400.08 C4456.01,5193.68,3795.63,5808.51,3000,5808.51 C2204.37,5808.51,1543.99,5193.69,1487.21,4400.09 M1393.2,4562.92 C1599.7,4462.61,1826.28,4410.49,2055.86,4410.49 C2893.48,4410.49,3572.52,5089.52,3572.52,5927.15 C3572.52,6430.48,3322.81,6901.02,2905.99,7183.15 M3094.01,7183.15 C2677.19,6901.02,2427.48,6430.48,2427.48,5927.15 C2427.48,5089.52,3106.51,4410.49,3944.14,4410.49 C4173.72,4410.49,4400.3,4462.61,4606.81,4562.92" stroke-width="336" stroke="{bg_color}" />'
-        f'<path d="M4507.93,4454.3 C4424.95,5224.59,3774.75,5808.51,3000,5808.51 C2225.26,5808.51,1575.06,5224.6,1492.07,4454.31 M1442.59,4540.01 C1635.76,4454.61,1844.65,4410.49,2055.86,4410.49 C2893.48,4410.49,3572.52,5089.52,3572.52,5927.15 C3572.52,6411.25,3341.42,6866.27,2950.52,7151.83 M3049.49,7151.83 C2658.58,6866.27,2427.48,6411.25,2427.48,5927.15 C2427.48,5089.52,3106.51,4410.49,3944.14,4410.49 C4155.36,4410.49,4364.24,4454.61,4557.42,4540.02" stroke-width="168" stroke="{stroke_color}" />'
-        f'<path d="M2581.95,5749.76 C2488.58,5722.98,2398,5687.3,2311.45,5643.2 M3527.47,5560.24 C3550.96,5654.49,3565.35,5750.78,3570.44,5847.78 M2890.58,4836.16 C2960.45,4768.68,3036.65,4708.08,3118.11,4655.17 M3778.87,6247.07 C3616.77,6393.02,3416.93,6490.49,3202.13,6528.37 M1861.44,5624.06 C1844.53,5544.5,1836,5463.39,1836,5382.05 C1836,5246.27,1859.76,5111.53,1906.2,4983.94 M3359.7,4275.02 C3567.14,4342.42,3751.47,4466.76,3891.68,4633.85" stroke-width="336" stroke="{bg_color}" />'
-        f'<path d="M2607.46,5756.83 C2496.54,5727.11,2389.36,5684.89,2287.97,5630.98 M3520.84,5534.61 C3550.56,5645.53,3567.59,5759.46,3571.59,5874.22 M2871.7,4854.71 C2952.9,4773.52,3043.05,4701.8,3140.44,4640.95 M3808.58,6219.36 C3631.76,6390.12,3405.42,6500.51,3162,6534.72 M1870.58,5663.65 C1847.61,5571.54,1836,5476.98,1836,5382.05 C1836,5232.61,1864.78,5084.57,1920.76,4946.01 M3320.84,4263.14 C3557.13,4330.9,3765.91,4471.72,3917.24,4665.42" stroke-width="168" stroke="{stroke_color}" />'
-        f'</g>'
-        f'</g>'
+        f'<g transform="translate(0, 146) scale(0.1, -0.1)" fill="{color}">'
+        f'<path d="{TRIQUETRA_PATH}"/>'
+        f"</g></g>"
     )
 
 
@@ -38,10 +65,7 @@ PALETTES = {
     "dark": {
         "bg": "#0d1117",
         "border": "#30363d",
-        "symbol": "#58a6ff",      # Tech Cyan knot stroke
-        "symbol_bg": "#0d1117",   # Interlace cutout mask
-        "ring_dash": "#30363d",   # Outer dashed time ring
-        "ring_solid": "#21262d",  # Concentric outer ring
+        "symbol": "#58a6ff",      # Tech Cyan Triquetra knot
         "gold": "#ffa657",        # Amber Gold ("Sic Mundus Creatus Est")
         "h": "#58a6ff",           # Accent Blue
         "k": "#ffa657",           # Key Orange/Amber
@@ -54,10 +78,7 @@ PALETTES = {
     "light": {
         "bg": "#ffffff",
         "border": "#d0d7de",
-        "symbol": "#0969da",      # Deep Tech Blue knot stroke
-        "symbol_bg": "#ffffff",   # Interlace cutout mask
-        "ring_dash": "#d0d7de",   # Outer dashed time ring
-        "ring_solid": "#eaeef2",  # Concentric outer ring
+        "symbol": "#0969da",      # Deep Tech Blue Triquetra knot
         "gold": "#953800",        # Warm Bronze ("Sic Mundus Creatus Est")
         "h": "#0969da",           # Accent Blue
         "k": "#953800",           # Key Warm Brown
@@ -225,26 +246,18 @@ def render(mode, stats):
         f'<rect x="0.5" y="0.5" width="869" height="474" rx="12" fill="{p["bg"]}" stroke="{p["border"]}"/>',
     ]
 
-    # Render outer celestial / time-loop orbital rings
-    out.append(
-        f'<circle cx="182" cy="193" r="105" fill="none" stroke="{p["ring_dash"]}" stroke-width="1.2" stroke-dasharray="3 3" />'
-    )
-    out.append(
-        f'<circle cx="182" cy="193" r="114" fill="none" stroke="{p["ring_solid"]}" stroke-width="0.8" />'
-    )
-
-    # Render iconic DARK Triquetra and circle knot
-    out.append(make_triquetra(p["symbol"], p["symbol_bg"], tx=85, ty=82, scale=0.55))
+    # Render pure Triquetra knot
+    out.append(make_triquetra(p["symbol"], tx=82, ty=85, scale=1.25))
 
     # Inscription & labels
     out.append(
-        f'<text x="182" y="322" text-anchor="middle" fill="{p["gold"]}" font-weight="bold" font-size="13px" letter-spacing="2.5px" xml:space="preserve">SIC MUNDUS CREATUS EST</text>'
+        f'<text x="182" y="318" text-anchor="middle" fill="{p["gold"]}" font-weight="bold" font-size="13px" letter-spacing="2.5px" xml:space="preserve">SIC MUNDUS CREATUS EST</text>'
     )
     out.append(
-        f'<text x="182" y="347" text-anchor="middle" fill="{p["h"]}" font-weight="bold" font-size="12px" letter-spacing="1.5px" xml:space="preserve">// AMRIT-VERSE //</text>'
+        f'<text x="182" y="343" text-anchor="middle" fill="{p["h"]}" font-weight="bold" font-size="12px" letter-spacing="1.5px" xml:space="preserve">// AMRIT-VERSE //</text>'
     )
     out.append(
-        f'<text x="182" y="368" text-anchor="middle" fill="{p["sub"]}" font-size="11px" letter-spacing="2px" xml:space="preserve">1953 · 1986 · 2019</text>'
+        f'<text x="182" y="365" text-anchor="middle" fill="{p["sub"]}" font-size="11px" letter-spacing="2px" xml:space="preserve">1953 · 1986 · 2019</text>'
     )
 
     # Render system & verified metrics on the right
