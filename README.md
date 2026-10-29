@@ -13,7 +13,7 @@ I’m Amritesh, a Computer Science & Engineering undergraduate at Excel Engineer
 Most of my day-to-day engineering happens in terminal environments on bare-metal Debian Linux. I enjoy working where software meets systems: designing relational schemas and API contracts, understanding packet flows and network boundaries, orchestrating containerized services with Docker, and writing clean, type-safe backend code in Java (Spring Boot), TypeScript/Next.js, and Python.
 
 ---
-
+<!--
 ## Featured Work & Systems Projects
 
 Here are a few real-world applications and systems tools I’ve engineered and maintain:
@@ -53,7 +53,7 @@ Here are a few real-world applications and systems tools I’ve engineered and m
 * **Workflow & Tooling**: Git & GitHub Actions, Neovim, VS Code, Postman, Linux CLI
 
 ---
-
+-->
 ## Connect & Profiles
 
 * **Personal Website**: [amritesh.com.np](https://amritesh.com.np)
